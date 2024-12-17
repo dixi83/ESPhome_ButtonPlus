@@ -46,6 +46,9 @@ packages:
 globals:
   - id: !extend nr_of_pages
     initial_value: '3'
+  - id: active_page_name
+    type: std::string
+    initial_value: ""
 
 font:
   - file: "https://github.com/web-fonts/ttf/raw/refs/heads/master/bpg-ingiri-arial-webfont.ttf"
@@ -490,12 +493,18 @@ display:
       switch (id(actual_page)){
         case 0:
           id(containers).execute();
+          // Page name to be shown on page 1
+          id(active_page_name) =  "Page 1";
           break;
         case 1:
           id(music_card).execute(20, 125);
+          // Page name to be shown on page 2
+          id(active_page_name) =  "Music page";
           break;
         case 2:
           it.print(100, 160, id(font_arial20), "This is page 3!");
+          // Page name to be shown on page 3
+          id(active_page_name) =  "Page 3";
           break;
       }
 
@@ -534,6 +543,9 @@ script:
           //>>> prev/next icons next to butotns
           id(main_display).image(0, 208, id(icon_prev_page), ImageAlign::TOP_LEFT, id(red));
           id(main_display).image(320, 208, id(icon_next_page), ImageAlign::TOP_RIGHT, id(red));
+          //
+          //>>> Show page name at bottom of display
+          id(main_display).printf(160, 238, id(font_arial20), id(white), TextAlign::BASELINE_CENTER, "%s",  id(active_page_name).c_str());
           //
           //>>> temperature inside:
           id(main_display).image(36, 15, id(icon_temp_inside), ImageAlign::TOP_CENTER, id(red));
