@@ -4,7 +4,7 @@ packages:
     files: 
       - 'package/2bar_1display.yaml'
     ref: main
-    refresh: 10s
+    refresh: 1d
 
 globals:
   - id: !extend nr_of_pages

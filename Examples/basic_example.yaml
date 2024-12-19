@@ -37,7 +37,7 @@ packages:
     url: https://github.com/dixi83/ESPHome_ButtonPlus
     files: [package/1bar_1display.yaml]
     ref: main 
-    refresh: 10s
+    refresh: 1d
 
 font:
   - file: "https://github.com/web-fonts/ttf/raw/refs/heads/master/bpg-ingiri-arial-webfont.ttf"
