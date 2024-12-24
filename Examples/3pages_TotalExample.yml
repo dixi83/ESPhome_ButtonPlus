@@ -46,6 +46,9 @@ packages:
 globals:
   - id: !extend nr_of_pages
     initial_value: '3'
+  - id: page_names
+    type: std::vector<std::string>
+    initial_value: '{"Page 1","Music","Page 3"}'
   - id: active_page_name
     type: std::string
     initial_value: ""
@@ -493,18 +496,12 @@ display:
       switch (id(actual_page)){
         case 0:
           id(containers).execute();
-          // Page name to be shown on page 1
-          id(active_page_name) =  "Page 1";
           break;
         case 1:
           id(music_card).execute(20, 125);
-          // Page name to be shown on page 2
-          id(active_page_name) =  "Music page";
           break;
         case 2:
           it.print(100, 160, id(font_arial20), "This is page 3!");
-          // Page name to be shown on page 3
-          id(active_page_name) =  "Page 3";
           break;
       }
 

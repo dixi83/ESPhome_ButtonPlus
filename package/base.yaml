@@ -57,7 +57,17 @@ sensor:
     name: "Temperature"
     address: 0x4A
     update_interval: 10s
-
+  - platform: template
+    name: "Active Page ID"
+    id: active_page_id_ha
+    update_interval: never
+    
+text_sensor:
+  - platform: template
+    name: "Active Page Name"
+    id: active_page_name_ha
+    update_interval: never
+    
 light:
   - platform: neopixelbus
     id: neopixels
@@ -82,6 +92,27 @@ time:
   - platform: homeassistant
     id: datetime
 
+number:
+  ## Creates a number entity in Home Assistant
+  #  It sets the menu of the Button Plus
+  - platform: template
+    name: "Menu Selector"
+    id: menuselector
+    optimistic: true
+    min_value: 0   # keep at 0
+    max_value: 10  # Maximum number of menu items. You can change this
+    step: 1
+    on_value:
+      then:
+        - lambda: |-
+            if(id(menuselector).state >= id(nr_of_pages)) {
+              id(actual_page) = id(nr_of_pages)-1;
+            } else {
+              id(actual_page) = id(menuselector).state;
+            }
+        # Refresh the screen
+        - script.execute: update_page
+        
 script:
 ######################
 ### paging scripts ###
@@ -93,7 +124,7 @@ script:
           if(id(actual_page) >= id(nr_of_pages)) {
             id(actual_page) = 0;
           }
-      - script.execute: update_all
+      - script.execute: update_page    
   - id: prev_page
     then: 
       - lambda: |-
@@ -101,4 +132,19 @@ script:
           if(id(actual_page) < 0) {
             id(actual_page) = id(nr_of_pages) - 1;
           }
+      - script.execute: update_page
+  - id: update_page
+    then:
+      - lambda: |-
+          id(active_page_name) = id(page_names)[id(actual_page)];
+      - sensor.template.publish:
+          id: active_page_id_ha
+          state: !lambda 'return id(actual_page);'
+      - text_sensor.template.publish:
+          id: active_page_name_ha
+          state: !lambda 'return id(active_page_name);'
+      - number.set:
+          id: menuselector
+          value: !lambda 'return id(actual_page);'
       - script.execute: update_all
+      
