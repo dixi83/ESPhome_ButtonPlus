@@ -105,12 +105,12 @@ number:
     min_value: 1
     max_value: ${nr_of_pages}
     step: 1
-    # on_value:
-    #   then:
+    on_value:
+      then:
         # - globals.set:
         #     id: actual_page
         #     value: !lambda 'return x;'
-        # - script.execute: update_all
+        - script.execute: update_all
         
 script:
 ######################
