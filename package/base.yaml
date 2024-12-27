@@ -108,7 +108,7 @@ number:
     on_value:
       then:
         - script.execute: update_all
-        - global.set:
+        - globals.set:
             id: actual_page
             value: !lambda 'return x'
         
