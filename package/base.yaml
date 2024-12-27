@@ -114,7 +114,7 @@ number:
               id(actual_page) = id(menu_selector).state;
             }
 #         # Refresh the screen
-#         - script.execute: update_all # @balk77 update_page results in a loop, moved update_all to here, now test
+        - script.execute: update_all # @balk77 update_page results in a loop, moved update_all to here, now test
         
 script:
 ######################
@@ -127,8 +127,10 @@ script:
           if(id(actual_page) >= $nr_of_pages) {
             id(actual_page) = 0;
           }
-      - script.execute: update_all    
-      # - script.execute: update_page    
+      - number.set:
+          id: menu_selector
+          value: !lambda 'return id(actual_page);'
+      - script.execute: update_all     
   - id: prev_page
     then: 
       - lambda: |-
@@ -136,8 +138,10 @@ script:
           if(id(actual_page) < 0) {
             id(actual_page) = $nr_of_pages - 1;
           }
+      - number.set:
+          id: menu_selector
+          value: !lambda 'return id(actual_page);'
       - script.execute: update_all
-      # - script.execute: update_page
   # - id: update_page
   #   then:
   #     - lambda: |-
@@ -148,6 +152,3 @@ script:
   #     - text_sensor.template.publish:
   #         id: active_page_name_ha
   #         state: !lambda 'return id(active_page_name);'
-  #     - number.set:
-  #         id: menu_selector
-  #         value: !lambda 'return id(actual_page);'
