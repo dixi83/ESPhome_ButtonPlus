@@ -110,7 +110,7 @@ number:
         - globals.set:
             id: actual_page
             value: !lambda 'return x;'
-        # - script.execute: update_all
+        - script.execute: update_all
         
 script:
 ######################
