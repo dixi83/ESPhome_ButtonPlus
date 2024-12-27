@@ -154,15 +154,9 @@ script:
   - id: update_all
     then:
       - component.update: main_display
-      - delay: 0.1s
       - script.execute: update_bar1_left
-      - delay: 0.1s
       - script.execute: update_bar1_right
-      - delay: 0.1s
       - script.execute: update_bar2_left
-      - delay: 0.1s
       - script.execute: update_bar2_right
-      - delay: 0.1s
       - script.execute: update_bar3_left
-      - delay: 0.1s
       - script.execute: update_bar3_right

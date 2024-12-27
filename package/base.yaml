@@ -13,7 +13,7 @@ esp32:
 interval:
   - interval: 1min
     then:
-      - logger.log: "ESPHome for Button+ v0.1.1"
+      - logger.log: "ESPHome for Button+ v0.1.2_dev"
 
 i2c:
   - id: temperature_sensor
@@ -34,7 +34,7 @@ globals:
     initial_value: '0'
   - id: page_names
     type: std::vector<std::string>
-    initial_value: '{"Page 1"}'
+    initial_value: '{"Page 1","Music","Page 3"}'
   - id: active_page_name
     type: std::string
     initial_value: ""
@@ -114,7 +114,7 @@ number:
               id(actual_page) = id(menu_selector).state;
             }
         # Refresh the screen
-#         - script.execute: update_page <<< this ends in an loop...
+        - script.execute: update_all # @balk77 update_page results in a loop, moved update_all to here, now test
         
 script:
 ######################
