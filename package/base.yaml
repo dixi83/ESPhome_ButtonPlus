@@ -102,8 +102,8 @@ number:
     name: "Menu Selector"
     id: menu_selector
     optimistic: true
-    min_value: 1   # keep at 0
-    max_value: ${nr_of_pages}
+    min_value: 0   # keep at 0
+    max_value: ${nr_of_pages - 1}
     step: 1
     on_value:
       then:
