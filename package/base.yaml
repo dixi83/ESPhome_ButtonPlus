@@ -129,7 +129,7 @@ script:
           }
       - number.set:
           id: menu_selector
-          value: !lambda 'return id(actual_page);'
+          value: !lambda 'return float(id(actual_page));'
       - script.execute: update_all     
   - id: prev_page
     then: 
@@ -140,7 +140,7 @@ script:
           }
       - number.set:
           id: menu_selector
-          value: !lambda 'return id(actual_page);'
+          value: !lambda 'return float(id(actual_page));'
       - script.execute: update_all
   # - id: update_page
   #   then:
