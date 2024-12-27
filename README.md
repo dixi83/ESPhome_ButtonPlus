@@ -42,6 +42,6 @@ The documentaion is yet to be made... Again If you want to help... Pull requests
 	- [x] figure out how to control them individually. [> maybe with Light Partition](https://esphome.io/components/light/partition)
 	- [x] find correct [type](https://esphome.io/components/light/neopixelbus.html#configuration-variables)
 - [x] Temperature sensor STS35
-- [ ] Make a basic [package](https://esphome.io/components/packages.html) so there is less initial code to be copied.
+- [x] Make a basic [package](https://esphome.io/components/packages.html) so there is less initial code to be copied.
 - [ ] Documentation
 - [ ] More examples

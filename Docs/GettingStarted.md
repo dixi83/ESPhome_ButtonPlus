@@ -1,4 +1,5 @@
 # Getting Started
+
 In order to get started with a 3 bar module, you should
 1. Make sure you have [ESPHome](https://esphome.io) installed
 2. Copy the file [3pages_TotalExample.yml](/examples/3pages_TotalExample.yml) to the root of the repository
