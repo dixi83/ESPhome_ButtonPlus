@@ -102,12 +102,12 @@ number:
     name: "Menu Selector"
     id: menu_selector
     optimistic: true
-    min_value: 0   # keep at 0
-    max_value: ${nr_of_pages} 
+    min_value: 1   # keep at 0
+    max_value: ${nr_of_pages}
     step: 1
     on_value:
       then:
-        - script.execute: update_all
+#        - script.execute: update_all
         - globals.set:
             id: actual_page
             value: !lambda 'return x;'
@@ -128,7 +128,7 @@ script:
       # - number.set:
       #     id: menu_selector
       #     value: !lambda 'return float(id(actual_page));'
-      - script.execute: update_all     
+ #     - script.execute: update_all     
   - id: prev_page
     then: 
       - number.decrement:
@@ -141,7 +141,7 @@ script:
       # # - number.set:
       # #     id: menu_selector
       # #     value: !lambda 'return float(id(actual_page));'
-      - script.execute: update_all
+  #    - script.execute: update_all
   # - id: update_page
   #   then:
   #     - lambda: |-
