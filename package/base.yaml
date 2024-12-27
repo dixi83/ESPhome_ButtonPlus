@@ -29,12 +29,15 @@ spi:
   mosi_pin: GPIO35
 
 globals:
-  - id: nr_of_pages
-    type: int
-    initial_value: '1'
   - id: actual_page
     type: int
     initial_value: '0'
+  - id: page_names
+    type: std::vector<std::string>
+    initial_value: '{"Page 1"}'
+  - id: active_page_name
+    type: std::string
+    initial_value: ""
 
 output:
   - platform: ledc
@@ -93,24 +96,24 @@ time:
     id: datetime
 
 number:
-  ## Creates a number entity in Home Assistant
+  # Creates a number entity in Home Assistant
   #  It sets the menu of the Button Plus
   - platform: template
     name: "Menu Selector"
-    id: menuselector
+    id: menu_selector
     optimistic: true
     min_value: 0   # keep at 0
-    max_value: 10  # TODO replace page numbers with substitution 
+    max_value: ${nr_of_pages} 
     step: 1
     on_value:
       then:
         - lambda: |-
-            if(id(menuselector).state >= id(nr_of_pages)) {
-              id(actual_page) = id(nr_of_pages)-1;
+            if(id(menu_selector).state >= $nr_of_pages) {
+              id(actual_page) = $nr_of_pages-1;
             } else {
-              id(actual_page) = id(menuselector).state;
+              id(actual_page) = id(menu_selector).state;
             }
-#         # Refresh the screen
+        # Refresh the screen
 #         - script.execute: update_page <<< this ends in an loop...
         
 script:
@@ -121,7 +124,7 @@ script:
     then: 
       - lambda: |-
           id(actual_page) = id(actual_page) + 1;
-          if(id(actual_page) >= id(nr_of_pages)) {
+          if(id(actual_page) >= $nr_of_pages) {
             id(actual_page) = 0;
           }
       - script.execute: update_page    
@@ -130,7 +133,7 @@ script:
       - lambda: |-
           id(actual_page) = id(actual_page) - 1;
           if(id(actual_page) < 0) {
-            id(actual_page) = id(nr_of_pages) - 1;
+            id(actual_page) = $nr_of_pages - 1;
           }
       - script.execute: update_page
   - id: update_page
@@ -144,7 +147,5 @@ script:
           id: active_page_name_ha
           state: !lambda 'return id(active_page_name);'
       - number.set:
-          id: menuselector
+          id: menu_selector
           value: !lambda 'return id(actual_page);'
-      - script.execute: update_all
-      

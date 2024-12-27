@@ -6,9 +6,14 @@ packages:
     ref: main
     refresh: 1d
 
+substitutions:
+  nr_of_pages: '1'
+
 globals:
-  - id: !extend nr_of_pages
-    initial_value: '1'
+  - id: !extend page_names
+    initial_value: '{"Page 1"}'
+  - id: !extend active_page_name
+    initial_value: ""
 
 font:
   - file: "https://github.com/web-fonts/ttf/raw/refs/heads/master/bpg-ingiri-arial-webfont.ttf"

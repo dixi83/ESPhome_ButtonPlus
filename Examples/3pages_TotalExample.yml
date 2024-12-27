@@ -29,6 +29,7 @@ wifi:
   password: !secret wifi_password
 
 substitutions:
+  nr_of_pages: '3'
   music_card_enity_id: 'media_player.media_keuken_2'
   music_card_text_color: FFFFFF
   music_card_icon_main_color: FF7F00
@@ -44,13 +45,9 @@ packages:
     refresh: 1d
 
 globals:
-  - id: !extend nr_of_pages
-    initial_value: '3'
-  - id: page_names
-    type: std::vector<std::string>
+  - id: !extend page_names
     initial_value: '{"Page 1","Music","Page 3"}'
-  - id: active_page_name
-    type: std::string
+  - id: !extend active_page_name
     initial_value: ""
 
 font:
