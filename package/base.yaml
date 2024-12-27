@@ -127,6 +127,7 @@ script:
           if(id(actual_page) >= $nr_of_pages) {
             id(actual_page) = 0;
           }
+      - script.execute: update_all    
       # - script.execute: update_page    
   - id: prev_page
     then: 
@@ -135,6 +136,7 @@ script:
           if(id(actual_page) < 0) {
             id(actual_page) = $nr_of_pages - 1;
           }
+      - script.execute: update_all
       # - script.execute: update_page
   # - id: update_page
   #   then:
