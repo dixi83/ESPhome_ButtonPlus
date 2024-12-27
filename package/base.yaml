@@ -34,7 +34,7 @@ globals:
     initial_value: '1'
   - id: page_names
     type: std::vector<std::string>
-    initial_value: '{"Page 1","Music","Page 3"}'
+    initial_value: '{"Page 1"}'
   - id: active_page_name
     type: std::string
     initial_value: ""
@@ -128,7 +128,7 @@ script:
   - id: update_page_naming
     then:
       - lambda: |-
-          id(active_page_name) = id(page_names)[id(actual_page)];
+          id(active_page_name) = id(page_names)[id(actual_page) - 1];
       - sensor.template.publish:
           id: active_page_id_ha
           state: !lambda 'return id(actual_page);'
