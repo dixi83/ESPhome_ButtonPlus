@@ -107,12 +107,12 @@ number:
     step: 1
     on_value:
       then:
-        - lambda: |-
-            if(id(menu_selector).state >= $nr_of_pages) {
-              id(actual_page) = $nr_of_pages-1;
-            } else {
-              id(actual_page) = id(menu_selector).state;
-            }
+        # - lambda: |-
+        #     if(id(menu_selector).state >= $nr_of_pages) {
+        #       id(actual_page) = $nr_of_pages-1;
+        #     } else {
+        #       id(actual_page) = id(menu_selector).state;
+        #     }
 #         # Refresh the screen
         - script.execute: update_all # @balk77 update_page results in a loop, moved update_all to here, now test
         
@@ -127,9 +127,9 @@ script:
           if(id(actual_page) >= $nr_of_pages) {
             id(actual_page) = 0;
           }
-      - number.set:
-          id: menu_selector
-          value: !lambda 'return float(id(actual_page));'
+      # - number.set:
+      #     id: menu_selector
+      #     value: !lambda 'return float(id(actual_page));'
       - script.execute: update_all     
   - id: prev_page
     then: 
@@ -138,9 +138,9 @@ script:
           if(id(actual_page) < 0) {
             id(actual_page) = $nr_of_pages - 1;
           }
-      - number.set:
-          id: menu_selector
-          value: !lambda 'return float(id(actual_page));'
+      # - number.set:
+      #     id: menu_selector
+      #     value: !lambda 'return float(id(actual_page));'
       - script.execute: update_all
   # - id: update_page
   #   then:
