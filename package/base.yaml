@@ -119,29 +119,11 @@ script:
   - id: next_page
     then: 
       - number.increment:
-          id: menu_selector
-      # - lambda: |-
-      #     id(actual_page) = id(actual_page) + 1;
-      #     if(id(actual_page) >= $nr_of_pages) {
-      #       id(actual_page) = 0;
-      #     }
-      # - number.set:
-      #     id: menu_selector
-      #     value: !lambda 'return float(id(actual_page));'
-      # - script.execute: update_all     
+          id: menu_selector 
   - id: prev_page
     then: 
       - number.decrement:
           id: menu_selector
-      # - lambda: |-
-      #     id(actual_page) = id(actual_page) - 1;
-      #     if(id(actual_page) < 0) {
-      #       id(actual_page) = $nr_of_pages - 1;
-      #     }
-      # # - number.set:
-      # #     id: menu_selector
-      # #     value: !lambda 'return float(id(actual_page));'
-      # - script.execute: update_all
   # - id: update_page
   #   then:
   #     - lambda: |-
