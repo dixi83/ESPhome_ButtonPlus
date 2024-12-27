@@ -107,10 +107,10 @@ number:
     step: 1
     on_value:
       then:
-        # - globals.set:
-        #     id: actual_page
-        #     value: !lambda 'return x;'
-        - script.execute: update_all
+        - globals.set:
+            id: actual_page
+            value: !lambda 'return x;'
+        # - script.execute: update_all
         
 script:
 ######################
