@@ -110,8 +110,9 @@ number:
             } else {
               id(actual_page) = id(menuselector).state;
             }
-#         # Refresh the screen
-#         - script.execute: update_page <<< this ends in an loop...
+        # Refresh the screen
+        - script.execute: update_page_remote
+        # <<< this ends in an loop...
         
 script:
 ######################
@@ -147,4 +148,14 @@ script:
           id: menuselector
           value: !lambda 'return id(actual_page);'
       - script.execute: update_all
-      
+  - id: update_page_remote
+    then:
+      - lambda: |-
+          id(active_page_name) = id(page_names)[id(actual_page)];
+      - text_sensor.template.publish:
+          id: active_page_name_ha
+          state: !lambda 'return id(active_page_name);'
+      - sensor.template.publish:
+          id: active_page_id_ha
+          state: !lambda 'return id(actual_page);'
+      - script.execute: update_all
