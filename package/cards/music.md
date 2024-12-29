@@ -2,7 +2,7 @@
 
 ## Usage
 
-* Add the music card file to youre files and supply the `entity_id`
+* Add the music card file to the package files and supply the `entity_id`
     ```
     substitutions:
     music_card_enity_id: 'media_player.media_keuken_2'
