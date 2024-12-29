@@ -496,6 +496,8 @@ display:
       switch (id(actual_page)){
         case 0:
           id(containers).execute();
+          // Example display item
+          id(displayitem).execute(160,2,"External","size_3_label","orange",id(outside_temperature).state,1,"","size_3_value","white","°C","size_3_unit","grey","TOP_LEFT");
           break;
         case 1:
           id(music_card).execute(20, 125);

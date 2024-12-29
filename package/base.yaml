@@ -147,4 +147,132 @@ script:
           id: menuselector
           value: !lambda 'return id(actual_page);'
       - script.execute: update_all
+  ## display item constructor
+  # requires all of the following parameters as input
+  # it requires fonts and colors to be defined
+  # can be called as lambda, for instance
+  # id(displayitem).execute(160,2,"External","size_3_label","orange",id(outside_temperature).state,1,"","size_3_value","white","°C","size_3_unit","grey","TOP_LEFT");
+  # this will position a block with label "External" in size 3 and color orange
+  # below that a value with 1 decimal, in white, size 3
+  # next to that unit "°C", size 3 in grey
+  # anchored at x,y = 160,2 top left corner
+  - id: displayitem
+    parameters: 
+      x: int             # x of anchor point
+      y: int             # y of anchor point
+      label: string      # label, to be shown above the value
+      labelfont: string  # any of size_1_value, size_2_unit, size_3_label and everything in between
+      labelcolor: string # any of white, orange, red, green or grey
+      valuenum: float    # value to display (numerical)
+      decimals: int      # rounding of value to display
+      valuestr: string   # if left empty it will select display the value float 
+      valuefont: string  # any of size_1_value, size_2_unit, size_3_label and everything in between
+      valuecolor: string # any of white, orange, red, green or grey
+      unit: string       # displayed unit
+      unitfont: string   # any of size_1_value, size_2_unit, size_3_label and everything in between
+      unitcolor: string  # any of white, orange, red, green or grey
+      align: string      # TOP_LEFT, TOP_CENTER or TOP_RIGHT
+    then:
+      lambda: |-
+        // Helper to get the font object from its ID string
+        // This lambda function maps font ID strings to their corresponding font objects.
+        // If the provided font_id matches a known font, it returns the appropriate font object.
+        // Otherwise, it returns nullptr.
+        auto get_font = [](const std::string &font_id) -> esphome::font::Font* {
+            if (font_id == "size_1_value") return id(size_1_value);
+            if (font_id == "size_1_label") return id(size_1_label);
+            if (font_id == "size_1_unit") return id(size_1_unit);
+            if (font_id == "size_2_value") return id(size_2_value);
+            if (font_id == "size_2_label") return id(size_2_label);
+            if (font_id == "size_2_unit") return id(size_2_unit);
+            if (font_id == "size_3_value") return id(size_3_value);
+            if (font_id == "size_3_label") return id(size_3_label);
+            if (font_id == "size_3_unit") return id(size_3_unit);
+            return nullptr; // Return nullptr if the font ID doesn't match any known font.
+        };
+        
+        auto get_color = [](const std::string &color_id) -> esphome::Color {
+            if (color_id == "white") return id(white);
+            if (color_id == "orange") return id(orange);
+            if (color_id == "red") return id(red);
+            if (color_id == "green") return id(green);
+            if (color_id == "grey") return id(grey);
+            return esphome::Color::WHITE; // Default color if no match
+        };
+
+        esphome::Color labelcolor_script = get_color(labelcolor);
+        esphome::Color valuecolor_script = get_color(valuecolor);
+        esphome::Color unitcolor_script = get_color(unitcolor);
+
+        // Resolve font objects based on the provided font IDs.
+        // These objects will later be used to measure text dimensions and render text on the display.
+        auto *labelfont_obj = get_font(labelfont);
+        auto *valuefont_obj = get_font(valuefont);
+        auto *unitfont_obj = get_font(unitfont);
+
+        // Format the numeric value as a string with the specified number of decimals.
+        // snprintf safely formats the float into a fixed-width character buffer.
+        char value_str[40];
+        // Check if valuestr is not empty
+        if (valuestr.empty()) {  // Check if valuestr has any content
+            snprintf(value_str, sizeof(value_str), "%.*f", decimals, valuenum);
+        } else {
+            // If valuestr is empty, copy a default or alternative string into value_str
+            strncpy(value_str, valuestr.c_str(), sizeof(value_str)); // Example default value
+            value_str[sizeof(value_str) - 1] = '\0'; // Ensure null-termination
+        }
+
+        // Helper function to calculate text dimensions.
+        // This lambda takes a font object and a text string as input,
+        // and it calculates the text's width and height (returned via reference parameters).
+        auto calculate_text_dimensions = [](esphome::font::Font *font, const char *text, int &width, int &baseline) {
+            int x_offset = 0, height = 0;
+            font->measure(text, &width, &x_offset, &baseline, &height);
+        };
+
+        // Calculate the dimensions of the label text.
+        int label_width = 0, label_height = 0;
+        calculate_text_dimensions(labelfont_obj, label.c_str(), label_width, label_height);
+
+        // Calculate the dimensions of the value text.
+        int value_width = 0, value_height = 0;
+        calculate_text_dimensions(valuefont_obj, value_str, value_width, value_height);
+
+        // Calculate the dimensions of the unit text.
+        int unit_width = 0, unit_height = 0;
+        calculate_text_dimensions(unitfont_obj, unit.c_str(), unit_width, unit_height);
+
+        if (align == "TOP_RIGHT" ){
+          // Render the label on the display at the specified position (x, y).
+          id(main_display).printf(x, y, labelfont_obj, labelcolor_script, TextAlign::TOP_RIGHT, "%s", label.c_str());
+
+          // Render the value below the label with a vertical offset equal to the label's height.
+          id(main_display).printf(x - unit_width, y - 2 + label_height , valuefont_obj, valuecolor_script, TextAlign::TOP_RIGHT, "%s", value_str);
+
+          // Render the unit text to the right of the value text with appropriate offsets.
+          id(main_display).printf(x, y - 2 + label_height + value_height - unit_height, unitfont_obj, unitcolor_script, TextAlign::TOP_RIGHT, "%s", unit.c_str());
+        } else if (align == "TOP_CENTER" ){
+          // Calculate the maximum width of the display item, being the label or value+unit
+          // subtract half of that from the anchor point and position based on top left corner of the text fields
+          int offset = (std::max(label_width, value_width + unit_width) + 1) / 2;
+
+          // Render the label on the display at the specified position (x, y).
+          id(main_display).printf(x - offset, y, labelfont_obj, labelcolor_script, TextAlign::TOP_LEFT, "%s", label.c_str());
+
+          // Render the value below the label with a vertical offset equal to the label's height.
+          id(main_display).printf(x - offset, y - 2 + label_height , valuefont_obj, valuecolor_script, TextAlign::TOP_LEFT, "%s", value_str);
+
+          // Render the unit text to the right of the value text with appropriate offsets.
+          id(main_display).printf(x - offset + value_width, y -2+ label_height + value_height - unit_height, unitfont_obj, unitcolor_script, TextAlign::TOP_LEFT, "%s", unit.c_str());
+        } else {
+          // Render the label on the display at the specified position (x, y).
+          id(main_display).printf(x, y, labelfont_obj, labelcolor_script, TextAlign::TOP_LEFT, "%s", label.c_str());
+
+          // Render the value below the label with a vertical offset equal to the label's height.
+          id(main_display).printf(x, y - 2 + label_height , valuefont_obj, valuecolor_script, TextAlign::TOP_LEFT, "%s", value_str);
+
+          // Render the unit text to the right of the value text with appropriate offsets.
+          id(main_display).printf(x + value_width, y - 2 + label_height + value_height - unit_height , unitfont_obj, unitcolor_script, TextAlign::TOP_LEFT, "%s", unit.c_str());
+        }
+        
       
