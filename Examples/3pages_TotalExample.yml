@@ -46,9 +46,7 @@ packages:
 
 globals:
   - id: !extend page_names
-    initial_value: '{"Page 1","Music","Page 3"}'
-  - id: !extend active_page_name
-    initial_value: ""
+    initial_value: '{"page 2","Music","Page 3"}'
 
 font:
   - file: "https://github.com/web-fonts/ttf/raw/refs/heads/master/bpg-ingiri-arial-webfont.ttf"
@@ -108,80 +106,80 @@ event:
     name: BAR1 button Left event
     id: bar1_btn_left_event
     event_types:
-      - "press page 0"
-      - "release page 0"
-      - "long press page 0"
       - "press page 1"
       - "release page 1"
       - "long press page 1"
       - "press page 2"
       - "release page 2"
       - "long press page 2"
+      - "press page 3"
+      - "release page 3"
+      - "long press page 3"
   - platform: template
     name: BAR1 button Right event
     id: bar1_btn_right_event
     event_types:
-      - "press page 0"
-      - "release page 0"
-      - "long press page 0"
       - "press page 1"
       - "release page 1"
       - "long press page 1"
       - "press page 2"
       - "release page 2"
       - "long press page 2"
+      - "press page 3"
+      - "release page 3"
+      - "long press page 3"
   - platform: template
     name: BAR2 button Left event
     id: bar2_btn_left_event
     event_types:
-      - "press page 0"
-      - "release page 0"
-      - "long press page 0"
       - "press page 1"
       - "release page 1"
       - "long press page 1"
       - "press page 2"
       - "release page 2"
       - "long press page 2"
+      - "press page 3"
+      - "release page 3"
+      - "long press page 3"
   - platform: template
     name: BAR2 button Right event
     id: bar2_btn_right_event
     event_types:
-      - "press page 0"
-      - "release page 0"
-      - "long press page 0"
       - "press page 1"
       - "release page 1"
       - "long press page 1"
       - "press page 2"
       - "release page 2"
       - "long press page 2"
+      - "press page 3"
+      - "release page 3"
+      - "long press page 3"
   - platform: template
     name: BAR3 button Left event
     id: bar3_btn_left_event
     event_types:
-      - "press page 0"
-      - "release page 0"
-      - "long press page 0"
       - "press page 1"
       - "release page 1"
       - "long press page 1"
       - "press page 2"
       - "release page 2"
       - "long press page 2"
+      - "press page 3"
+      - "release page 3"
+      - "long press page 3"
   - platform: template
     name: BAR3 button Right event
     id: bar3_btn_right_event
     event_types:
-      - "press page 0"
-      - "release page 0"
-      - "long press page 0"
       - "press page 1"
       - "release page 1"
       - "long press page 1"
       - "press page 2"
       - "release page 2"
       - "long press page 2"
+      - "press page 3"
+      - "release page 3"
+      - "long press page 3"
 
 binary_sensor:
   - id: !extend main_display_btn_left
@@ -194,29 +192,29 @@ binary_sensor:
     on_click:
       lambda: |-
         switch (id(actual_page)){
-          case 0:
-            id(bar1_btn_left_event).trigger("press page 0");
-            break;
           case 1:
             id(bar1_btn_left_event).trigger("press page 1");
-            id(music_card_vol_down).execute();
             break;
           case 2:
             id(bar1_btn_left_event).trigger("press page 2");
+            id(music_card_vol_down).execute();
+            break;
+          case 3:
+            id(bar1_btn_left_event).trigger("press page 3");
             break;
         }
     on_release:
       lambda: |-
         switch (id(actual_page)){
-          case 0:
-            id(bar1_btn_left_event).trigger("release page 0");
-            break;
           case 1:
             id(bar1_btn_left_event).trigger("release page 1");
             break;
           case 2:
             id(bar1_btn_left_event).trigger("release page 2");
             break;
+          case 3:
+            id(bar1_btn_left_event).trigger("release page 3");
+            break;
         }
     on_multi_click:
       - timing:
@@ -224,43 +222,43 @@ binary_sensor:
         then:
           - lambda: |-
               switch (id(actual_page)){
-                case 0:
-                  id(bar1_btn_left_event).trigger("long press page 0");
-                  break;
                 case 1:
                   id(bar1_btn_left_event).trigger("long press page 1");
                   break;
                 case 2:
                   id(bar1_btn_left_event).trigger("long press page 2");
                   break;
+                case 3:
+                  id(bar1_btn_left_event).trigger("long press page 3");
+                  break;
               }
   - id: !extend bar1_btn_right
     on_click:
       lambda: |-
         switch (id(actual_page)){
-          case 0:
-            id(bar1_btn_right_event).trigger("press page 0");
-            break;
           case 1:
             id(bar1_btn_right_event).trigger("press page 1");
-            id(music_card_vol_up).execute();
             break;
           case 2:
             id(bar1_btn_right_event).trigger("press page 2");
+            id(music_card_vol_up).execute();
+            break;
+          case 3:
+            id(bar1_btn_right_event).trigger("press page 3");
             break;
         }
     on_release:
       lambda: |-
         switch (id(actual_page)){
-          case 0:
-            id(bar1_btn_right_event).trigger("release page 0");
-            break;
           case 1:
             id(bar1_btn_right_event).trigger("release page 1");
             break;
           case 2:
             id(bar1_btn_right_event).trigger("release page 2");
             break;
+          case 3:
+            id(bar1_btn_right_event).trigger("release page 3");
+            break;
         }
     on_multi_click:
       - timing:
@@ -268,43 +266,43 @@ binary_sensor:
         then:
           - lambda: |-
               switch (id(actual_page)){
-                case 0:
-                  id(bar1_btn_right_event).trigger("long press page 0");
-                  break;
                 case 1:
                   id(bar1_btn_right_event).trigger("long press page 1");
                   break;
                 case 2:
                   id(bar1_btn_right_event).trigger("long press page 2");
                   break;
+                case 3:
+                  id(bar1_btn_right_event).trigger("long press page 3");
+                  break;
               }
   - id: !extend bar2_btn_left
     on_click:
       lambda: |-
         switch (id(actual_page)){
-          case 0:
-            id(bar2_btn_left_event).trigger("press page 0");
-            break;
           case 1:
             id(bar2_btn_left_event).trigger("press page 1");
-            id(music_card_prev).execute();
             break;
           case 2:
             id(bar2_btn_left_event).trigger("press page 2");
+            id(music_card_prev).execute();
+            break;
+          case 3:
+            id(bar2_btn_left_event).trigger("press page 3");
             break;
         }
     on_release:
       lambda: |-
         switch (id(actual_page)){
-          case 0:
-            id(bar2_btn_left_event).trigger("release page 0");
-            break;
           case 1:
             id(bar2_btn_left_event).trigger("release page 1");
             break;
           case 2:
             id(bar2_btn_left_event).trigger("release page 2");
             break;
+          case 3:
+            id(bar2_btn_left_event).trigger("release page 3");
+            break;
         }
     on_multi_click:
       - timing:
@@ -312,43 +310,43 @@ binary_sensor:
         then:
           - lambda: |-
               switch (id(actual_page)){
-                case 0:
-                  id(bar2_btn_left_event).trigger("long press page 0");
-                  break;
                 case 1:
                   id(bar2_btn_left_event).trigger("long press page 1");
                   break;
                 case 2:
                   id(bar2_btn_left_event).trigger("long press page 2");
                   break;
+                case 3:
+                  id(bar2_btn_left_event).trigger("long press page 3");
+                  break;
               }
   - id: !extend bar2_btn_right
     on_click:
       lambda: |-
         switch (id(actual_page)){
-          case 0:
-            id(bar2_btn_right_event).trigger("press page 0");
-            break;
           case 1:
             id(bar2_btn_right_event).trigger("press page 1");
-            id(music_card_next).execute();
             break;
           case 2:
             id(bar2_btn_right_event).trigger("press page 2");
+            id(music_card_next).execute();
+            break;
+          case 3:
+            id(bar2_btn_right_event).trigger("press page 3");
             break;
         }
     on_release:
       lambda: |-
         switch (id(actual_page)){
-          case 0:
-            id(bar2_btn_right_event).trigger("release page 0");
-            break;
           case 1:
             id(bar2_btn_right_event).trigger("release page 1");
             break;
           case 2:
             id(bar2_btn_right_event).trigger("release page 2");
             break;
+          case 3:
+            id(bar2_btn_right_event).trigger("release page 3");
+            break;
         }
     on_multi_click:
       - timing:
@@ -356,42 +354,42 @@ binary_sensor:
         then:
           - lambda: |-
               switch (id(actual_page)){
-                case 0:
-                  id(bar2_btn_right_event).trigger("long press page 0");
-                  break;
                 case 1:
                   id(bar2_btn_right_event).trigger("long press page 1");
                   break;
                 case 2:
                   id(bar2_btn_right_event).trigger("long press page 2");
                   break;
+                case 3:
+                  id(bar2_btn_right_event).trigger("long press page 3");
+                  break;
               }
   - id: !extend bar3_btn_left
     on_click:
       lambda: |-
         switch (id(actual_page)){
-          case 0:
-            id(bar3_btn_left_event).trigger("press page 0");
-            break;
           case 1:
             id(bar3_btn_left_event).trigger("press page 1");
-            id(music_card_power).execute();
             break;
           case 2:
             id(bar3_btn_left_event).trigger("press page 2");
+            id(music_card_power).execute();
+            break;
+          case 3:
+            id(bar3_btn_left_event).trigger("press page 3");
             break;
         }
     on_release:
       lambda: |-
         switch (id(actual_page)){
-          case 0:
-            id(bar3_btn_left_event).trigger("release page 0");
-            break;
           case 1:
             id(bar3_btn_left_event).trigger("release page 1");
             break;
           case 2:
             id(bar3_btn_left_event).trigger("release page 2");
+            break;
+          case 3:
+            id(bar3_btn_left_event).trigger("release page 3");
             break;
         }
     on_multi_click:
@@ -400,42 +398,42 @@ binary_sensor:
         then:
           - lambda: |-
               switch (id(actual_page)){
-                case 0:
-                  id(bar3_btn_left_event).trigger("long press page 0");
-                  break;
                 case 1:
                   id(bar3_btn_left_event).trigger("long press page 1");
                   break;
                 case 2:
                   id(bar3_btn_left_event).trigger("long press page 2");
                   break;
+                case 3:
+                  id(bar3_btn_left_event).trigger("long press page 3");
+                  break;
               }
   - id: !extend bar3_btn_right
     on_click:
       lambda: |-
         switch (id(actual_page)){
-          case 0:
-            id(bar3_btn_right_event).trigger("press page 0");
-            break;
           case 1:
             id(bar3_btn_right_event).trigger("press page 1");
-            id(music_card_playpause).execute();
             break;
           case 2:
             id(bar3_btn_right_event).trigger("press page 2");
+            id(music_card_playpause).execute();
+            break;
+          case 3:
+            id(bar3_btn_right_event).trigger("press page 3");
             break;
         }
     on_release:
       lambda: |-
         switch (id(actual_page)){
-          case 0:
-            id(bar3_btn_right_event).trigger("release page 0");
-            break;
           case 1:
             id(bar3_btn_right_event).trigger("release page 1");
             break;
           case 2:
             id(bar3_btn_right_event).trigger("release page 2");
+            break;
+          case 3:
+            id(bar3_btn_right_event).trigger("release page 3");
             break;
         }
     on_multi_click:
@@ -444,14 +442,14 @@ binary_sensor:
         then:
             lambda: |-
               switch (id(actual_page)){
-                case 0:
-                  id(bar3_btn_right_event).trigger("long press page 0");
-                  break;
                 case 1:
                   id(bar3_btn_right_event).trigger("long press page 1");
                   break;
                 case 2:
                   id(bar3_btn_right_event).trigger("long press page 2");
+                  break;
+                case 3:
+                  id(bar3_btn_right_event).trigger("long press page 3");
                   break;
               }
 
@@ -491,13 +489,13 @@ display:
     lambda: |-
       id(all_pages_main).execute();
       switch (id(actual_page)){
-        case 0:
+        case 1:
           id(containers).execute();
           break;
-        case 1:
+        case 2:
           id(music_card).execute(20, 125);
           break;
-        case 2:
+        case 3:
           it.print(100, 160, id(font_arial20), "This is page 3!");
           break;
       }
@@ -556,13 +554,13 @@ script:
     then:
       - lambda: |-
           switch (id(actual_page)){
-            case 0:
+            case 1:
               id(bar_display).image(80, 0, id(lightbulb), ImageAlign::TOP_CENTER, id(red));
               break;
-            case 1:
+            case 2:
               id(music_card_bar).execute("volume_down");
               break;
-            case 2:
+            case 3:
               id(bar_display).image(80, 0, id(lightbulb), ImageAlign::TOP_CENTER, id(blue));
               break;
           }
@@ -570,13 +568,13 @@ script:
     then:
       - lambda: |-
           switch (id(actual_page)){
-            case 0:
+            case 1:
               id(bar_display).image(80, 0, id(lightbulb), ImageAlign::TOP_CENTER, id(red));
               break;
-            case 1:
+            case 2:
               id(music_card_bar).execute("volume_up");
               break;
-            case 2:
+            case 3:
               id(bar_display).image(80, 0, id(lightbulb), ImageAlign::TOP_CENTER, id(blue));
               break;
           }
@@ -584,13 +582,13 @@ script:
     then:
       - lambda: |-
           switch (id(actual_page)){
-            case 0:
+            case 1:
               id(bar_display).image(80, 0, id(lightbulb), ImageAlign::TOP_CENTER, id(red));
               break;
-            case 1:
+            case 2:
               id(music_card_bar).execute("prev");
               break;
-            case 2:
+            case 3:
               id(bar_display).image(80, 0, id(lightbulb), ImageAlign::TOP_CENTER, id(blue));
               break;
           }
@@ -598,13 +596,13 @@ script:
     then:
       - lambda: |-
           switch (id(actual_page)){
-            case 0:
+            case 1:
               id(bar_display).image(80, 0, id(lightbulb), ImageAlign::TOP_CENTER, id(red));
               break;
-            case 1:
+            case 2:
               id(music_card_bar).execute("next");
               break;
-            case 2:
+            case 3:
               id(bar_display).image(80, 0, id(lightbulb), ImageAlign::TOP_CENTER, id(blue));
               break;
           }
@@ -612,13 +610,13 @@ script:
     then:
       - lambda: |-
           switch (id(actual_page)){
-            case 0:
+            case 1:
               id(bar_display).image(80, 0, id(lightbulb), ImageAlign::TOP_CENTER, id(red));
               break;
-            case 1:
+            case 2:
               id(music_card_bar).execute("power");
               break;
-            case 2:
+            case 3:
               id(bar_display).image(80, 0, id(lightbulb), ImageAlign::TOP_CENTER, id(blue));
               break;
           }
@@ -626,13 +624,13 @@ script:
     then:
       - lambda: |-
           switch (id(actual_page)){
-            case 0:
+            case 1:
               id(bar_display).image(80, 0, id(lightbulb), ImageAlign::TOP_CENTER, id(red));
               break;
-            case 1:
+            case 2:
               id(music_card_bar).execute("playpause");
               break;
-            case 2:
+            case 3:
               id(bar_display).image(80, 0, id(lightbulb), ImageAlign::TOP_CENTER, id(blue));
               break;
           }
