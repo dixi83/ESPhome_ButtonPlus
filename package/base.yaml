@@ -143,4 +143,3 @@ script:
       - text_sensor.template.publish:
           id: active_page_name_ha
           state: !lambda 'return id(active_page_name);'
-      
