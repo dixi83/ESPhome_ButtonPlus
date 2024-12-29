@@ -19,13 +19,24 @@ The ESPHome integration adds more flexibility and features, but also add some mo
 [English support topic on Home Assistant Community:](https://)
 TODO
  -->
+
+## Documentation
+
+The documentation of the Button+ ESPHome integration can be found in the [Docs directory](./Docs)
+
+## Useful Links
+
+* Display Items: https://esphome.io/components/display/
+* Fonts: https://esphome.io/components/font#display-fonts
+* Icon's and images: https://esphome.io/components/image#display-image
  
 ## Changes:
 
 ### NEXT: 0.2.0
 #### NEW:
-- added display item card (thanks @balk77)
+- added [display item card](./package/cards/display_item.md) (thanks @balk77)
 - menu can now be controlled from HA and has page naming (thanks @balk77)
+- the [music card](./package/cards/music.md) now changes the play/pause icon depending on the players state (thanks @balk77)
 
 #### BREAKING:
 - global `nr_of_pages` is now replaced by `nr_of_pages` ***substitution***, if you have compile errors please see the basic examples
@@ -40,16 +51,6 @@ Created a Package
 
 ### Before 0.1.0
 versions with first prove of concepts
-
-## Documentation
-
-The documentation of the Button+ ESPHome integration can be found in the [Docs directory](./Docs)
-
-## Useful Links
-
-* Display Items: https://esphome.io/components/display/
-* Fonts: https://esphome.io/components/font#display-fonts
-* Icon's and images: https://esphome.io/components/image#display-image
 
 ## Status
 
