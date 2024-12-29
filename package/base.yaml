@@ -13,7 +13,7 @@ esp32:
 interval:
   - interval: 1min
     then:
-      - logger.log: "ESPHome for Button+ v0.1.2_dev"
+      - logger.log: "ESPHome for Button+ v0.2.0_dev"
 
 i2c:
   - id: temperature_sensor
