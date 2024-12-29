@@ -33,6 +33,60 @@
 ##
 #####################################################
 
+font:
+  - file: "https://github.com/web-fonts/ttf/raw/refs/heads/master/bpg-ingiri-arial-webfont.ttf"
+    id: display_item_size_1_label
+    size: 10
+    bpp: 4
+  - file: "https://github.com/web-fonts/ttf/raw/refs/heads/master/bpg-ingiri-arial-webfont.ttf"
+    id: display_item_size_2_label
+    size: 12
+    bpp: 4
+  - file: "https://github.com/web-fonts/ttf/raw/refs/heads/master/bpg-ingiri-arial-webfont.ttf"
+    id: display_item_size_3_label
+    size: 14
+    bpp: 4
+  - file: "https://github.com/web-fonts/ttf/raw/refs/heads/master/bpg-ingiri-arial-webfont.ttf"
+    id: display_item_size_1_value
+    size: 15
+    bpp: 4
+  - file: "https://github.com/web-fonts/ttf/raw/refs/heads/master/bpg-ingiri-arial-webfont.ttf"
+    id: display_item_size_2_value
+    size: 20
+    bpp: 4
+  - file: "https://github.com/web-fonts/ttf/raw/refs/heads/master/bpg-ingiri-arial-webfont.ttf"
+    id: display_item_size_3_value
+    size: 20
+    bpp: 4
+  - file: "https://github.com/web-fonts/ttf/raw/refs/heads/master/bpg-ingiri-arial-webfont.ttf"
+    id: display_item_size_1_unit
+    size: 15
+    bpp: 4
+  - file: "https://github.com/web-fonts/ttf/raw/refs/heads/master/bpg-ingiri-arial-webfont.ttf"
+    id: display_item_size_2_unit
+    size: 20
+    bpp: 4
+  - file: "https://github.com/web-fonts/ttf/raw/refs/heads/master/bpg-ingiri-arial-webfont.ttf"
+    id: display_item_size_3_unit
+    size: 20
+    bpp: 4
+
+color:
+  - id: display_item_red
+    hex: FF0000
+  - id: display_item_blue
+    hex: 0000FF
+  - id: display_item_yellow
+    hex: FFFF00
+  - id: display_item_green
+    hex: 00FF00
+  - id: display_item_orange
+    hex: FF7F00
+  - id: display_item_white
+    hex: FFFFFF
+  - id: display_item_grey
+    hex: A6A6A6
+
 script:
   - id: display_item
     parameters: 
@@ -57,24 +111,25 @@ script:
         // If the provided font_id matches a known font, it returns the appropriate font object.
         // Otherwise, it returns nullptr.
         auto get_font = [](const std::string &font_id) -> esphome::font::Font* {
-            if (font_id == "size_1_value") return id(size_1_value);
-            if (font_id == "size_1_label") return id(size_1_label);
-            if (font_id == "size_1_unit") return id(size_1_unit);
-            if (font_id == "size_2_value") return id(size_2_value);
-            if (font_id == "size_2_label") return id(size_2_label);
-            if (font_id == "size_2_unit") return id(size_2_unit);
-            if (font_id == "size_3_value") return id(size_3_value);
-            if (font_id == "size_3_label") return id(size_3_label);
-            if (font_id == "size_3_unit") return id(size_3_unit);
+            if (font_id == "size_1_value") return id(display_item_size_1_value);
+            if (font_id == "size_1_label") return id(display_item_size_1_label);
+            if (font_id == "size_1_unit") return id(display_item_size_1_unit);
+            if (font_id == "size_2_value") return id(display_item_size_2_value);
+            if (font_id == "size_2_label") return id(display_item_size_2_label);
+            if (font_id == "size_2_unit") return id(display_item_size_2_unit);
+            if (font_id == "size_3_value") return id(display_item_size_3_value);
+            if (font_id == "size_3_label") return id(display_item_size_3_label);
+            if (font_id == "size_3_unit") return id(display_item_size_3_unit);
             return nullptr; // Return nullptr if the font ID doesn't match any known font.
         };
         
         auto get_color = [](const std::string &color_id) -> esphome::Color {
-            if (color_id == "white") return id(white);
-            if (color_id == "orange") return id(orange);
-            if (color_id == "red") return id(red);
-            if (color_id == "green") return id(green);
-            if (color_id == "grey") return id(grey);
+            if (color_id == "white") return id(display_item_white);
+            if (color_id == "blue") return id(display_item_blue);
+            if (color_id == "orange") return id(display_item_orange);
+            if (color_id == "red") return id(display_item_red);
+            if (color_id == "green") return id(display_item_green);
+            if (color_id == "grey") return id(display_item_grey);
             return esphome::Color::WHITE; // Default color if no match
         };
 
