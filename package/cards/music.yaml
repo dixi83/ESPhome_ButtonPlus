@@ -45,10 +45,10 @@ image:
     id: icon_music_playpause
     resize: 75x75
   - file: mdi:play-box-outline
-    id: icon_music_play
+    id: icon_music_play_box
     resize: 75x75
   - file: mdi:pause-box-outline
-    id: icon_music_pause
+    id: icon_music_pause_box
     resize: 75x75
   - file: mdi:power
     id: icon_music_standby
@@ -67,6 +67,12 @@ image:
     resize: 75x75
   - file: mdi:skip-backward
     id: icon_music_prev
+    resize: 75x75
+  - file: mdi:play
+    id: icon_music_play
+    resize: 75x75
+  - file: mdi:pause
+    id: icon_music_pause
     resize: 75x75
 
 color: 
@@ -100,7 +106,7 @@ text_sensor:
     id: music_playerstate
     entity_id: ${music_card_enity_id}
     on_value: 
-      - script.execute: update_main
+      - script.execute: update_all
 
 script:
   - id: music_card
@@ -117,9 +123,9 @@ script:
           } else if (strcmp(id(music_playerstate).state.c_str(), "idle") == 0) {
               id(main_display).image(x, 1+y, id(icon_music_idle), ImageAlign::TOP_LEFT, id(music_card_icon_main_color));
           } else if (strcmp(id(music_playerstate).state.c_str(), "playing") == 0) {
-              id(main_display).image(x, 1+y, id(icon_music_play), ImageAlign::TOP_LEFT, id(music_card_icon_main_color));
+              id(main_display).image(x, 1+y, id(icon_music_play_box), ImageAlign::TOP_LEFT, id(music_card_icon_main_color));
           } else if (strcmp(id(music_playerstate).state.c_str(), "paused") == 0) {
-              id(main_display).image(x, 1+y, id(icon_music_pause), ImageAlign::TOP_LEFT, id(music_card_icon_main_color));
+              id(main_display).image(x, 1+y, id(icon_music_pause_box), ImageAlign::TOP_LEFT, id(music_card_icon_main_color));
           } else if (strcmp(id(music_playerstate).state.c_str(), "standby") == 0) {
               id(main_display).image(x, 1+y, id(icon_music_standby), ImageAlign::TOP_LEFT, id(music_card_icon_main_color));
           } else if (strcmp(id(music_playerstate).state.c_str(), "buffering") == 0) {
@@ -151,7 +157,11 @@ script:
           } else if (strcmp(type.c_str(), "prev") == 0) { // button "prev"
               id(bar_display).image(80, 2, id(icon_music_prev), ImageAlign::TOP_CENTER, id(music_card_icon_bar_color));
           } else if (strcmp(type.c_str(), "playpause") == 0) { // button "playpause"
-              id(bar_display).image(80, 2, id(icon_music_playpause), ImageAlign::TOP_CENTER, id(music_card_icon_bar_color));
+              if (strcmp(id(music_playerstate).state.c_str(), "playing") == 0) {
+                id(bar_display).image(80, 2, id(icon_music_pause), ImageAlign::TOP_CENTER, id(music_card_icon_bar_color));
+              } else {
+                id(bar_display).image(80, 2, id(icon_music_play), ImageAlign::TOP_CENTER, id(music_card_icon_bar_color));
+              }
           } else if (strcmp(type.c_str(), "power") == 0) { // button "power"
               id(bar_display).image(80, 2, id(icon_music_power), ImageAlign::TOP_CENTER, id(music_card_icon_bar_color));
           }
