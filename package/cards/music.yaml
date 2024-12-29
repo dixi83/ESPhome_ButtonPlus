@@ -14,14 +14,8 @@
 ##
 ##   display:
 ##   - id: !extend main_display
-##        pages:
-##          - id: player_page
-##            lambda: |-
-##              id(all_pages).execute();
-##              // insert music card:
-##              // >> id(music_card).execute(x, y);
-##              id(music_card).execute(20, 125);
-##   - id: !extend bar1_left
+##     lambda: |-
+##         id(music_card).execute(20, 125);
 ##
 #####################################################
 
