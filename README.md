@@ -22,7 +22,7 @@ TODO
 
 ## Documentation
 
-The documentation of the Button+ ESPHome integration can be found in the [Docs directory](./Docs)
+The documentation of the Button+ ESPHome integration can be found in the [Docs directory](./Docs/DOCS.md)
 
 ## Useful Links
 
@@ -60,10 +60,7 @@ The documentation is work in progress.. Again If you want to help... Pull reques
 
 ## TODO:
 
-- [x] Neonleds
-	- [x] figure out how to control them individually. [> maybe with Light Partition](https://esphome.io/components/light/partition)
-	- [x] find correct [type](https://esphome.io/components/light/neopixelbus.html#configuration-variables)
-- [x] Temperature sensor STS35
-- [x] Make a basic [package](https://esphome.io/components/packages.html) so there is less initial code to be copied.
 - [ ] Documentation
+	- [x] initial firmware load
+	- [ ] links to the card documentation
 - [ ] More examples
