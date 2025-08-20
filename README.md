@@ -2,6 +2,8 @@
 
 *ESPHome documentation and examples to make ESPHome working on the Button+*
 
+![Buttonplus running ESPhome](./Docs/ButtonPlusImage.aif)
+
 ## Button+
 
 The Button+ is a modular control panel for home automation systems. It is designed to work with MQTT. It has several modules: a "Base module", a "Main display" and "BAR modules" where the position and amount can be changed according your needs. 
