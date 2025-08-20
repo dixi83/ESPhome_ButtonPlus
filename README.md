@@ -2,7 +2,7 @@
 
 *ESPHome documentation and examples to make ESPHome working on the Button+*
 
-![Buttonplus running ESPhome](./Docs/ButtonPlusImage.aif)
+![Buttonplus running ESPhome](./Docs/ButtonPlusImage.png)
 
 ## Button+
 
