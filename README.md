@@ -2,7 +2,7 @@
 
 *ESPHome documentation and examples to make ESPHome working on the Button+*
 
-![Buttonplus running ESPhome](./Docs/ButtonPlusImage.png =300x397)
+<img src="./Docs/ButtonPlusImage.png" alt="Buttonplus running ESPhome" width="300" height="397"/>
 
 ## Button+
 
