@@ -21,57 +21,75 @@
 
 image:
   - file: mdi:music-box-outline
+    type: binary
     id: icon_music_album
     resize: 20x20
   - file: mdi:account-music
+    type: binary
     id: icon_music_artist
     resize: 20x20
   - file: mdi:music-note
+    type: binary
     id: icon_music_songtitle
     resize: 20x20
   - file: mdi:power-off
+    type: binary
     id: icon_music_off
     resize: 75x75
   - file: mdi:power-on
+    type: binary
     id: icon_music_on
     resize: 75x75
   - file: mdi:power
+    type: binary
     id: icon_music_power
     resize: 75x75
   - file: mdi:timer-sand-empty
+    type: binary
     id: icon_music_idle
     resize: 75x75
   - file: mdi:play-pause
+    type: binary
     id: icon_music_playpause
     resize: 75x75
   - file: mdi:play-box-outline
+    type: binary
     id: icon_music_play_box
     resize: 75x75
   - file: mdi:pause-box-outline
+    type: binary
     id: icon_music_pause_box
     resize: 75x75
   - file: mdi:power
+    type: binary
     id: icon_music_standby
     resize: 75x75
   - file: mdi:download-box-outline
+    type: binary
     id: icon_music_buffering
     resize: 75x75
   - file: mdi:volume-plus
+    type: binary
     id: icon_music_vol_up
     resize: 75x75
   - file: mdi:volume-minus
+    type: binary
     id: icon_music_vol_down
     resize: 75x75
   - file: mdi:skip-forward
+    type: binary
     id: icon_music_next
     resize: 75x75
   - file: mdi:skip-backward
+    type: binary
     id: icon_music_prev
     resize: 75x75
   - file: mdi:play
+    type: binary
     id: icon_music_play
     resize: 75x75
   - file: mdi:pause
+    type: binary
     id: icon_music_pause
     resize: 75x75
 
