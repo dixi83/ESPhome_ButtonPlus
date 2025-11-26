@@ -285,7 +285,7 @@ display:
       number: 5
       mode:
         output: true
-      inverted: false
+      inverted: true
     show_test_card: false
     dimensions: 
       height: 240
