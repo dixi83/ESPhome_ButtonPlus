@@ -225,7 +225,7 @@ output:
       number: 5
       mode:
         output: true
-      inverted: true
+      inverted: false
   - id: cs_pin_bar1_right
     platform: gpio
     pin:
@@ -233,7 +233,7 @@ output:
       number: 1
       mode:
         output: true
-      inverted: true
+      inverted: false
   - id: cs_pin_bar2_left
     platform: gpio
     pin:
@@ -241,7 +241,7 @@ output:
       number: 5
       mode:
         output: true
-      inverted: true
+      inverted: false
   - id: cs_pin_bar2_right
     platform: gpio
     pin:
@@ -249,7 +249,7 @@ output:
       number: 1
       mode:
         output: true
-      inverted: true
+      inverted: false
   - id: cs_pin_bar3_left
     platform: gpio
     pin:
@@ -257,7 +257,7 @@ output:
       number: 5
       mode:
         output: true
-      inverted: true
+      inverted: false
   - id: cs_pin_bar3_right
     platform: gpio
     pin:
@@ -265,7 +265,7 @@ output:
       number: 1
       mode:
         output: true
-      inverted: true
+      inverted: false
 
 display:
   ####################
