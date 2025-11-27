@@ -133,6 +133,7 @@ display:
     invert_colors: false
     color_order: rgb
     update_interval: 30s
+    color_palette: 8BIT
     dc_pin: 
       number: GPIO37
       allow_other_uses: true
