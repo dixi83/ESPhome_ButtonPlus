@@ -25,9 +25,13 @@
     * `prev`
     * `playpause`
     * `power`
-  
+
+    Determine side of the BAR's mini display
+    * `left`
+    * `right`
+
     ```
-    id(music_card_bar).execute("volume_up");
+    id(music_card_bar).execute("volume_up","left");
     ```
 
 * add actions to the buttons

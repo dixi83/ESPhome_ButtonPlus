@@ -164,24 +164,53 @@ script:
   - id: music_card_bar
     parameters:
       type: string
+      side: string
     then:
       - lambda: |-
           if (strcmp(type.c_str(), "volume_up") == 0) { // button "volume_up"
-              id(bar_display).image(80, 2, id(icon_music_vol_up), ImageAlign::TOP_CENTER, id(music_card_icon_bar_color));
+            if (strcmp(side.c_str(), "left") == 0) { // left side
+                id(bar_display_left).image(80, 2, id(icon_music_vol_up), ImageAlign::TOP_CENTER, id(music_card_icon_bar_color));
+            } else { // right side
+                id(bar_display_right).image(80, 2, id(icon_music_vol_up), ImageAlign::TOP_CENTER, id(music_card_icon_bar_color));
+            }
           } else if (strcmp(type.c_str(), "volume_down") == 0) { // button "volume_down"
-              id(bar_display).image(80, 2, id(icon_music_vol_down), ImageAlign::TOP_CENTER, id(music_card_icon_bar_color));
+            if (strcmp(side.c_str(), "left") == 0) { // left side
+              id(bar_display_left).image(80, 2, id(icon_music_vol_down), ImageAlign::TOP_CENTER, id(music_card_icon_bar_color));
+            } else { // right side
+              id(bar_display_right).image(80, 2, id(icon_music_vol_down), ImageAlign::TOP_CENTER, id(music_card_icon_bar_color));
+            }
           } else if (strcmp(type.c_str(), "next") == 0) { // button "next"
-              id(bar_display).image(80, 2, id(icon_music_next), ImageAlign::TOP_CENTER, id(music_card_icon_bar_color));
+            if (strcmp(side.c_str(), "left") == 0) { // left side
+              id(bar_display_left).image(80, 2, id(icon_music_next), ImageAlign::TOP_CENTER, id(music_card_icon_bar_color));
+            } else { // right side
+              id(bar_display_right).image(80, 2, id(icon_music_next), ImageAlign::TOP_CENTER, id(music_card_icon_bar_color));
+            }
           } else if (strcmp(type.c_str(), "prev") == 0) { // button "prev"
-              id(bar_display).image(80, 2, id(icon_music_prev), ImageAlign::TOP_CENTER, id(music_card_icon_bar_color));
+            if (strcmp(side.c_str(), "left") == 0) { // left side
+              id(bar_display_left).image(80, 2, id(icon_music_prev), ImageAlign::TOP_CENTER, id(music_card_icon_bar_color));
+            } else { // right side
+              id(bar_display_right).image(80, 2, id(icon_music_prev), ImageAlign::TOP_CENTER, id(music_card_icon_bar_color));
+            }
           } else if (strcmp(type.c_str(), "playpause") == 0) { // button "playpause"
+            if (strcmp(side.c_str(), "left") == 0) { // left side
               if (strcmp(id(music_playerstate).state.c_str(), "playing") == 0) {
-                id(bar_display).image(80, 2, id(icon_music_pause), ImageAlign::TOP_CENTER, id(music_card_icon_bar_color));
+                id(bar_display_left).image(80, 2, id(icon_music_pause), ImageAlign::TOP_CENTER, id(music_card_icon_bar_color));
               } else {
-                id(bar_display).image(80, 2, id(icon_music_play), ImageAlign::TOP_CENTER, id(music_card_icon_bar_color));
+                id(bar_display_left).image(80, 2, id(icon_music_play), ImageAlign::TOP_CENTER, id(music_card_icon_bar_color));
               }
+            } else { // right side
+              if (strcmp(id(music_playerstate).state.c_str(), "playing") == 0) {
+                id(bar_display_right).image(80, 2, id(icon_music_pause), ImageAlign::TOP_CENTER, id(music_card_icon_bar_color));
+              } else {
+                id(bar_display_right).image(80, 2, id(icon_music_play), ImageAlign::TOP_CENTER, id(music_card_icon_bar_color));
+              }
+            } 
           } else if (strcmp(type.c_str(), "power") == 0) { // button "power"
-              id(bar_display).image(80, 2, id(icon_music_power), ImageAlign::TOP_CENTER, id(music_card_icon_bar_color));
+            if (strcmp(side.c_str(), "left") == 0) { // left side
+              id(bar_display_left).image(80, 2, id(icon_music_power), ImageAlign::TOP_CENTER, id(music_card_icon_bar_color));
+            } else { // right side
+              id(bar_display_right).image(80, 2, id(icon_music_power), ImageAlign::TOP_CENTER, id(music_card_icon_bar_color));
+            }
           }
   - id: music_card_vol_up
     then:
