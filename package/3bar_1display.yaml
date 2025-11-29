@@ -14,7 +14,7 @@ esphome:
   on_boot:
     priority: -100
     then:
-      - script.execute: setup_bar_displays
+      # - script.execute: setup_bar_displays
       - script.execute: update_bar1_left
       - script.execute: update_bar1_right
       - script.execute: update_bar2_left
@@ -272,12 +272,14 @@ display:
   ### Main Display ###
   ####################
   - id: main_display
-    platform: ili9xxx
-    model: ili9341
+    platform: mipi_spi
+    model: ST7789V
     invert_colors: false
-    color_order: rgb
+    color_order: BGR
     update_interval: 30s
-    color_palette: 8BIT
+    color_depth: 16
+    rotation: 90
+    data_rate: 80MHz
     dc_pin: 
       number: GPIO37
       allow_other_uses: true
@@ -291,22 +293,38 @@ display:
     dimensions: 
       height: 240
       width: 320
-    rotation: 180
   ###################
   ### BAR modules ###
   ###################
-  - id: bar_display
-    platform: ili9xxx
+  - id: bar_display_left
+    platform: mipi_spi
     model: ST7735
-    color_order: bgr
+    color_order: BGR
     update_interval: never
+    color_depth: 16
+    rotation: 270
+    data_rate: 80MHz
     dc_pin: 
       number: GPIO37
       allow_other_uses: true
-    invert_colors: false
     show_test_card: false
     auto_clear_enabled: false
     dimensions: 
       height: 160
       width: 80
-      offset_width: 24
+  - id: bar_display_right
+    platform: mipi_spi
+    model: ST7735
+    color_order: BGR
+    update_interval: never
+    color_depth: 16
+    rotation: 90
+    data_rate: 80MHz
+    dc_pin: 
+      number: GPIO37
+      allow_other_uses: true
+    show_test_card: false
+    auto_clear_enabled: false
+    dimensions: 
+      height: 160
+      width: 80
